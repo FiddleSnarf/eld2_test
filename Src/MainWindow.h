@@ -7,6 +7,11 @@ namespace Ui
     class MainWindow;
 }
 
+namespace DeviceControl
+{
+    class Eld7ModbusDriver;
+}
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -17,4 +22,5 @@ public:
 
 private:
     std::unique_ptr<Ui::MainWindow> m_ui;
+    std::unique_ptr<DeviceControl::Eld7ModbusDriver> m_drive;
 };

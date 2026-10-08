@@ -58,4 +58,5 @@ if(WIN32)
     endif()
 
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${QT_PLUGINS_SRC}/platforms" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/platforms")
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${QT_PLUGINS_SRC}/styles" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/styles")
 endif()

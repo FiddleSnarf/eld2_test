@@ -1,6 +1,7 @@
 
 #include "ui_MainWindow.h"
 #include "MainWindow.h"
+#include "Devices/Eld7ModbusDriver.h"
 
 
 MainWindow::MainWindow(QWidget* parent)
