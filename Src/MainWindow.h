@@ -21,6 +21,12 @@ public:
     ~MainWindow();
 
 private:
+    void initSpeedPanel();
+    void initPositioningPanel();
+    void initTorquePanel();
+    void connectSignals();
+
+private:
     std::unique_ptr<Ui::MainWindow> m_ui;
     std::unique_ptr<DeviceControl::Eld7ModbusDriver> m_drive;
 };

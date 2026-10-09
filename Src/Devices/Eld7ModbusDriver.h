@@ -60,8 +60,8 @@ public:
     bool setAmperageLimit(int percentOfMaximum);
     bool resetPosition();
     bool startPositioning(int32_t targetPosition, int16_t speed);
-    bool startSpeedRegulation(raw_t targetSpeed);
-    bool startAmperageRegulation(int32_t targetAmperage_mA, std::optional<raw_t> speedLimit);
+    bool startSpeedRegulation(int16_t targetSpeed);
+    bool startAmperageRegulation(int32_t targetAmperage_mA, std::optional<int16_t> speedLimit);
     void hardStop();
     void stopMoving();
     void resetError();

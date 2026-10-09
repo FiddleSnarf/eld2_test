@@ -143,13 +143,13 @@ bool Eld7ModbusDriver::isRunning() const
     return m_isRunning;
 }
 
-bool Eld7ModbusDriver::startSpeedRegulation(raw_t targetSpeed)
+bool Eld7ModbusDriver::startSpeedRegulation(int16_t targetSpeed)
 {
     const bool ok =
         setCMode(false)
         && setServoOn(true)
         && writePrMode(Eld::PrMode::enVelocity)
-        && writeHoldingRegister(Eld::EnModbusRegister::enPath0_Velocity, static_cast<int16_t>(targetSpeed))
+        && writeHoldingRegister(Eld::EnModbusRegister::enPath0_Velocity, targetSpeed)
         && writeHoldingRegister(Eld::EnModbusRegister::enControlRegister, 0x0010);  // Trigger Path0 motion
 
     if (!ok)
@@ -164,7 +164,7 @@ bool Eld7ModbusDriver::startSpeedRegulation(raw_t targetSpeed)
     return true;
 }
 
-bool Eld7ModbusDriver::startAmperageRegulation(int32_t targetAmperage_mA, std::optional<raw_t> speedLimit)
+bool Eld7ModbusDriver::startAmperageRegulation(int32_t targetAmperage_mA, std::optional<int16_t> speedLimit)
 {
     // Через path упралять по усилию нельзя
     // Для Pr0.01 в таблице видим что для режима 6 есть 2 столбца 1st и 2nd mode.
@@ -185,7 +185,7 @@ bool Eld7ModbusDriver::startAmperageRegulation(int32_t targetAmperage_mA, std::o
 
     if (speedLimit.has_value())
     {
-        if (auto res = writeHoldingRegister(Eld::enVelLimitInTorqueMode, std::abs(*speedLimit)); !res)
+        if (auto res = writeHoldingRegister(Eld::enVelLimitInTorqueMode, std::abs(speedLimit.value())); !res)
             return res;
     }
 
